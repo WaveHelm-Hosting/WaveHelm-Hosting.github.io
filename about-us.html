@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                        'wave-light': '#f0f8ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                </a>
+                <a href="/" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-shadow shadow-lg hover:shadow-sky-300/50">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Our Mission</h1>
+            <p class="mt-4 text-lg text-gray-600">To provide powerful, reliable, and affordable hosting solutions that empower creators and businesses to thrive online. We believe in the power of the open web and are dedicated to providing the tools and support our customers need to succeed.</p>
+        </div>
+        
+        <div class="container mx-auto px-6 py-20">
+            <div id="team">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Meet Our Leadership</h3>
+                    <p class="text-gray-600 mt-2">The driving force behind our innovation and customer success.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Team Cards -->
+                    <div class="team-card text-center bg-white p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=GS" alt="Garret Shoemaker" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Garret Shoemaker</h4><p class="text-wave-blue font-semibold">Founder & CEO</p><p class="text-gray-600 mt-2 text-sm">Garret is the visionary founder of WaveHelm, dedicated to making web hosting simple, fast, and accessible for everyone.</p></div>
+                    <div class="team-card text-center bg-white p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=DC" alt="Daniel Cartwright" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Daniel Cartwright</h4><p class="text-wave-blue font-semibold">Chief Operating Officer</p><p class="text-gray-600 mt-2 text-sm">Daniel oversees daily operations, ensuring our infrastructure is robust, secure, and always running at peak performance.</p></div>
+                    <div class="team-card text-center bg-white p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=RM" alt="Ryan Mahoney" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Ryan Mahoney</h4><p class="text-wave-blue font-semibold">Chief Marketing & Sales Officer</p><p class="text-gray-600 mt-2 text-sm">Ryan leads our growth strategies, connecting with customers and sharing the WaveHelm story with the world.</p></div>
+                    <div class="team-card text-center bg-white p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=AS" alt="Alexis Sappington" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Alexis Sappington</h4><p class="text-wave-blue font-semibold">Chief Human Resources Officer</p><p class="text-gray-600 mt-2 text-sm">Alexis cultivates our amazing company culture and empowers the talented individuals who make WaveHelm great.</p></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wave-dark text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4">
+                    <p class="text-slate-400">Secure & Scalable Web Hosting</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Products</h5>
+                    <ul class="space-y-2">
+                        <li><a href="web-hosting.html" class="text-slate-400 hover:text-white">Web Hosting</a></li>
+                        <li><a href="game-hosting.html" class="text-slate-400 hover:text-white">Game Hosting</a></li>
+                        <li><a href="dedicated-servers.html" class="text-slate-400 hover:text-white">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Company</h5>
+                    <ul class="space-y-2">
+                        <li><a href="about-us.html" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="contact-us.html" class="text-slate-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="text-lg font-semibold mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="terms-of-service.html" class="text-slate-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html" class="text-slate-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-slate-700 pt-8 text-center text-slate-500">
+                <p>&copy; 2025 WaveHelm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
