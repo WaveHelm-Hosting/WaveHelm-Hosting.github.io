@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm - Marketing Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                        'wave-light': '#f0f8ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 153, 255, 0.2);
+        }
+        
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-section {
+            opacity: 0;
+        }
+
+        .animated-section.is-visible {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+        
+        .animated-card {
+             opacity: 0;
+        }
+        
+        .animated-section.is-visible .animated-card {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                </a>
+                <a href="/" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-shadow shadow-lg hover:shadow-sky-300/50">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="py-20 bg-white animated-section">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Grow Your Brand with WaveHelm</h1>
+                <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">From SEO to social media, our expert marketing services are designed to help your business make a splash.</p>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 bg-slate-50 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Service Card 1: SEO -->
+                    <div class="animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300 service-card">
+                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="trending-up" class="w-10 h-10"></i></div>
+                         <h4 class="text-2xl font-bold text-gray-900">Search Engine Optimization (SEO)</h4>
+                         <p class="text-gray-500 mt-2 flex-grow">Climb the search rankings and connect with more customers. We offer comprehensive SEO audits, keyword research, and on-page optimization.</p>
+                    </div>
+                    <!-- Service Card 2: Social Media -->
+                    <div class="animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300 service-card">
+                        <div class="flex items-center justify-center h-20 w-20 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="thumbs-up" class="w-10 h-10"></i></div>
+                        <h4 class="text-2xl font-bold text-gray-900">Social Media Management</h4>
+                        <p class="text-gray-500 mt-2 flex-grow">Build a vibrant online community. We manage your social media channels, create engaging content, and run targeted ad campaigns.</p>
+                    </div>
+                    <!-- Service Card 3: Content Creation -->
+                    <div class="animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300 service-card">
+                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="pencil-ruler" class="w-10 h-10"></i></div>
+                         <h4 class="text-2xl font-bold text-gray-900">Content Creation</h4>
+                         <p class="text-gray-500 mt-2 flex-grow">Tell your story with compelling content. Our team creates high-quality blog posts, articles, and website copy that resonates with your audience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white animated-section">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Ready to Grow?</h3>
+                <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Contact us today for a free consultation and a custom marketing plan tailored to your business.</p>
+                <div class="mt-8 flex justify-center items-center flex-wrap gap-4">
+                    <a href="https://discord.gg/a3yEGSdgxH" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-[#5865F2] rounded-lg hover:bg-[#4f5bda] transition-colors shadow-lg">
+                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.885-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4464.8245-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1619-.425-.3973-.8742-.6083-1.2495a.0741.0741 0 00-.0785-.0371 19.7363 19.7363 0 00-4.885 1.5152.069.069 0 00-.0321.0277C.5334 9.0458-.319 13.5779.0992 18.0578a.0825.0825 0 00.0321.0534c.4346.2513.912.4755 1.401.6749a.077.077 0 00.086-.0215c.4617-.5588.8582-1.1804 1.1747-1.8464a.072.072 0 00-.042-.0814c-.3252-.125-.6296-.2649-.9093-.4125a.0749.0749 0 00-.091.0215c-.2551.346-.5027.7025-.7362 1.0695a.0741.0741 0 00.014.0854c2.8227 1.6627 6.0228 1.6627 8.8454 0a.0741.0741 0 00.014-.0854c-.2335-.367-.4811-.7235-.7362-1.0695a.0749.0749 0 00-.091-.0215c-.2797.1476-.5841.2875-.9093.4125a.072.072 0 00-.042.0814c.3165.666.713 1.2876 1.1747 1.8464a.077.077 0 00.086.0215c.489-.1994.9664-.4236 1.401-.6749a.0825.0825 0 00.0321-.0534c.4416-4.631-.5767-9.0458-2.2234-13.6602a.069.069 0 00-.0321-.0277zM8.02 15.3312c-.8416 0-1.5242-.7146-1.5242-1.5942s.6826-1.5942 1.5242-1.5942c.8416 0 1.5242.7146 1.5242 1.5942s-.6826 1.5942-1.5242 1.5942zm7.9548 0c-.8416 0-1.5242-.7146-1.5242-1.5942s.6826-1.5942 1.5242-1.5942c.8416 0 1.5242.7146 1.5242 1.5942s-.6826 1.5942-1.5242 1.5942z"/></svg>
+                        Join our Discord
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=marketing@wavehelm.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-slate-700 rounded-lg hover:bg-slate-800 transition-colors shadow-lg">
+                        <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wave-dark text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4">
+                    <p class="text-slate-400">Secure & Scalable Web Hosting</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Products</h5>
+                    <ul class="space-y-2">
+                        <li><a href="web-hosting.html" class="text-slate-400 hover:text-white">Web Hosting</a></li>
+                        <li><a href="game-hosting.html" class="text-slate-400 hover:text-white">Game Hosting</a></li>
+                        <li><a href="dedicated-servers.html" class="text-slate-400 hover:text-white">Dedicated Servers</a></li>
+                        <li><a href="marketing-services.html" class="text-slate-400 hover:text-white">Marketing Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Company</h5>
+                    <ul class="space-y-2">
+                        <li><a href="about-us.html" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="contact-us.html" class="text-slate-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="text-lg font-semibold mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="terms-of-service.html" class="text-slate-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html" class="text-slate-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-slate-700 pt-8 text-center text-slate-500">
+                <p>&copy; 2025 WaveHelm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Intersection Observer for scroll animations
+        const animatedSections = document.querySelectorAll('.animated-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    const cards = entry.target.querySelectorAll('.animated-card');
+                    cards.forEach((card, index) => {
+                        card.style.animationDelay = `${index * 150}ms`;
+                    });
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedSections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
