@@ -1,347 +1,437 @@
-<!--
-  WaveHelm Homepage Snippet
-  - This code is designed to be embedded directly into a Squarespace code block.
-  - It includes all necessary styles and scripts to function independently.
-  - For best results, place this on a "Blank Page" in Squarespace to avoid template conflicts.
--->
-
-<style>
-    /* Base styles for the body when embedded */
-    body {
-        font-family: 'Inter', sans-serif;
-        transition: background-color 0.5s ease;
-        background-color: #f8fafc; /* Corresponds to bg-slate-50 */
-        color: #1f2937; /* Corresponds to text-gray-800 */
-    }
-    .gradient-bg {
-        background-color: #0a192f;
-        background-image: radial-gradient(circle at top left, rgba(0, 153, 255, 0.3), transparent 40%),
-                          radial-gradient(circle at bottom right, rgba(0, 234, 255, 0.3), transparent 40%);
-    }
-    .wave-bg {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        overflow: hidden;
-        line-height: 0;
-        transform: rotate(180deg);
-    }
-    .wave-bg svg {
-        position: relative;
-        display: block;
-        width: calc(100% + 1.3px);
-        height: 150px;
-        animation: wave-animation 10s ease-in-out infinite alternate;
-    }
-    .wave-bg .shape-fill {
-        fill: #f8fafc; /* Corresponds to bg-slate-50 */
-    }
-    .pricing-card:hover, .feature-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 25px 50px -12px rgba(0, 153, 255, 0.2);
-    }
-    
-    /* Keyframe Animations */
-    @keyframes wave-animation {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-20px); }
-    }
-
-    @keyframes fade-in-up {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes fade-in-down {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.7); }
-        50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 234, 255, 0); }
-    }
-
-    /* Animation Classes */
-    .fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
-
-    .animated-section {
-        opacity: 0;
-    }
-
-    .animated-section.is-visible {
-        animation: fade-in-up 0.8s ease-out forwards;
-    }
-    
-    .animated-card {
-         opacity: 0;
-    }
-    
-    .animated-section.is-visible .animated-card {
-        animation: fade-in-up 0.8s ease-out forwards;
-    }
-
-    /* FAQ Accordion Styles */
-    .faq-answer {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-in-out;
-    }
-    .faq-item.active .faq-answer {
-        max-height: 200px; /* Adjust as needed */
-    }
-    .faq-item .faq-icon {
-        transition: transform 0.3s ease-in-out;
-    }
-    .faq-item.active .faq-icon {
-        transform: rotate(180deg);
-    }
-</style>
-
-<!-- Main Content -->
-<main>
-    <!-- Hero Section -->
-    <section class="relative gradient-bg py-20 md:py-32 overflow-hidden">
-        <div class="container mx-auto px-6 text-center z-10 relative">
-            <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.2s; opacity:0;">Ride the Digital Wave with Confidence</h2>
-            <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.4s; opacity:0;">
-                Blazing-fast, ultra-secure, and effortlessly scalable hosting solutions designed to propel your online presence forward.
-            </p>
-            <div class="mt-8" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.6s; opacity:0;">
-                <a href="#pricing" class="inline-block bg-wave-cyan text-wave-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all shadow-xl hover:shadow-cyan-300/50 transform hover:-translate-y-1 pulse-button">Explore Plans</a>
-            </div>
-        </div>
-        <div class="wave-bg">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,23.5V0H0V47.35C102.4,59,221.24,68.32,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-white animated-section">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Everything You Need to Succeed</h3>
-                <p class="text-gray-600 mt-2">Our platform is built for performance, security, and ease of use.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature Cards -->
-                <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="zap" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Blazing Fast Speed</h4><p class="text-gray-600">Powered by NVMe SSDs and LiteSpeed servers for unparalleled performance.</p>
-                </div>
-                <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="shield-check" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Ironclad Security</h4><p class="text-gray-600">Free SSL, DDoS protection, and daily backups to keep your site safe.</p>
-                </div>
-                <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="bar-chart-2" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Optimized & Scalable</h4><p class="text-gray-600">Optimized for platforms like WordPress & Squarespace. Upgrade resources with one click as your site grows.</p>
-                </div>
-                <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
-                    <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="life-buoy" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">24/7 Expert Support</h4><p class="text-gray-600">Our friendly team is always here to help you, day or night.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-slate-50 animated-section">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Flexible Hosting for Every Need</h3>
-                <p class="text-gray-600 mt-2">Specialized pricing for websites, game servers, and dedicated hardware.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                <!-- Cards -->
-                <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
-                     <div class="flex items-center justify-center h-20 w-20 rounded-full bg-green-100 text-green-600 mx-auto mb-4"><i data-lucide="globe" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Web Hosting</h4><p class="text-gray-500 mt-2 flex-grow">All-in-one packages to design, launch, and host your website with ease.</p><a href="web-hosting.html" class="mt-8 block w-full text-center bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors">View Plans</a>
-                </div>
-                <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
-                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="gamepad-2" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Game Hosting</h4><p class="text-gray-500 mt-2 flex-grow">High-performance servers optimized for low latency and peak gaming performance.</p><a href="game-hosting.html" class="mt-8 block w-full text-center bg-wave-blue text-white font-semibold py-3 rounded-lg hover:bg-sky-500 transition-colors">View Plans</a>
-                </div>
-                <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
-                     <div class="flex items-center justify-center h-20 w-20 rounded-full bg-slate-800 text-white mx-auto mb-4"><i data-lucide="server" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Dedicated Servers</h4><p class="text-gray-500 mt-2 flex-grow">Ultimate power and control with bare metal servers for your most demanding applications.</p><a href="dedicated-servers.html" class="mt-8 block w-full text-center bg-slate-800 text-white font-semibold py-3 rounded-lg hover:bg-slate-900 transition-colors">View Plans</a>
-                </div>
-                 <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300 border-2 border-wave-cyan">
-                     <div class="flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 text-wave-cyan mx-auto mb-4"><i data-lucide="sliders-horizontal" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Custom Build</h4><p class="text-gray-500 mt-2 flex-grow">Configure your own server from the ground up with our easy-to-use builder.</p><a href="configure-server.html" class="mt-8 block w-full text-center bg-wave-cyan text-wave-dark font-semibold py-3 rounded-lg hover:bg-cyan-300 transition-colors">Configure Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Marketing Services Section -->
-    <section id="marketing" class="py-20 bg-white animated-section">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 text-center md:text-left">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Amplify Your Reach with Expert Marketing</h2>
-                    <p class="text-lg text-gray-600 mt-4">Beyond hosting, we help you grow. Our marketing services are designed to boost your visibility, engage your audience, and drive conversions.</p>
-                    <ul class="space-y-3 mt-6 text-gray-600">
-                         <li class="flex items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Search Engine Optimization (SEO)</li>
-                         <li class="flex items-center"><i data-lucide="megaphone" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Social Media Management</li>
-                         <li class="flex items-center"><i data-lucide="mail-check" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Email Marketing Campaigns</li>
-                         <li class="flex items-center"><i data-lucide="file-text" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Content Creation & Strategy</li>
-                    </ul>
-                    <a href="marketing-services.html" class="mt-8 inline-block bg-wave-blue text-white font-semibold py-3 px-8 rounded-lg hover:bg-sky-500 transition-colors shadow-lg hover:shadow-sky-300/50">Explore Marketing Services</a>
-                </div>
-                <div class="md:w-1/2">
-                    <img src="https://i.imgur.com/ZtYX3B7.png" alt="WaveHelm marketing banner" class="rounded-lg shadow-xl w-full h-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0099ff/ffffff?text=Marketing+Growth';">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-slate-50 animated-section">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Loved by Developers Worldwide</h3>
-                <p class="text-gray-600 mt-2">Don't just take our word for it. Here's what our customers say.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial Cards -->
-                <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"WaveHelm is hands down the fastest and most reliable hosting I've ever used. My site's performance has skyrocketed since I switched."</p><div class="flex items-center"><img src="https://placehold.co/48x48/E0E7FF/4F46E5?text=JS" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Jane Smith</p><p class="text-gray-500 text-sm">Founder of TechGlow</p></div></div></div>
-                <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"The 24/7 support is a lifesaver. They are knowledgeable, friendly, and resolved my issue within minutes. Highly recommended!"</p><div class="flex items-center"><img src="https://placehold.co/48x48/DBEAFE/1D4ED8?text=MD" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Michael Doe</p><p class="text-gray-500 text-sm">Freelance Developer</p></div></div></div>
-                <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"Migrating to WaveHelm was seamless. Their control panel is intuitive and makes managing my websites a breeze. A+ service!"</p><div class="flex items-center"><img src="https://placehold.co/48x48/C7D2FE/4338CA?text=AK" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Alice Kim</p><p class="text-gray-500 text-sm">E-commerce Store Owner</p></div></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="py-20 bg-white animated-section">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Meet Our Leadership</h3>
-                <p class="text-gray-600 mt-2">The driving force behind our innovation and customer success.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Team Cards -->
-                <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=GS" alt="Garret Shoemaker" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Garret Shoemaker</h4><p class="text-wave-blue font-semibold">Founder & CEO</p><p class="text-gray-600 mt-2 text-sm">Garret is the visionary founder of WaveHelm, dedicated to making web hosting simple, fast, and accessible for everyone.</p></div>
-                <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=DC" alt="Daniel Cartwright" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Daniel Cartwright</h4><p class="text-wave-blue font-semibold">Chief Operating Officer</p><p class="text-gray-600 mt-2 text-sm">Daniel oversees daily operations, ensuring our infrastructure is robust, secure, and always running at peak performance.</p></div>
-                <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=RM" alt="Ryan Mahoney" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Ryan Mahoney</h4><p class="text-wave-blue font-semibold">Chief Marketing & Sales Officer</p><p class="text-gray-600 mt-2 text-sm">Ryan leads our growth strategies, connecting with customers and sharing the WaveHelm story with the world.</p></div>
-                <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=AS" alt="Alexis Sappington" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Alexis Sappington</h4><p class="text-wave-blue font-semibold">Chief Human Resources Officer</p><p class="text-gray-600 mt-2 text-sm">Alexis cultivates our amazing company culture and empowers the talented individuals who make WaveHelm great.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="py-20 bg-slate-50 animated-section">
-        <div class="container mx-auto px-6 max-w-3xl">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h3>
-                <p class="text-gray-600 mt-2">Have questions? We have answers.</p>
-            </div>
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <div class="faq-item bg-white rounded-lg shadow-sm">
-                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                        <span class="font-semibold text-lg text-gray-800">What payment methods do you accept?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
-                    </button>
-                    <div class="faq-answer px-6">
-                        <p class="text-gray-600 pt-2 pb-4">We accept all major credit cards (Visa, Mastercard, American Express) and PayPal.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 2 -->
-                <div class="faq-item bg-white rounded-lg shadow-sm">
-                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                        <span class="font-semibold text-lg text-gray-800">Do you offer a money-back guarantee?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
-                    </button>
-                    <div class="faq-answer px-6">
-                        <p class="text-gray-600 pt-2 pb-4">Yes, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, just contact us within 7 days for a full refund.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 3 -->
-                <div class="faq-item bg-white rounded-lg shadow-sm">
-                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                        <span class="font-semibold text-lg text-gray-800">Can I upgrade my plan later?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
-                    </button>
-                    <div class="faq-answer px-6">
-                        <p class="text-gray-600 pt-2 pb-4">Absolutely! You can upgrade or downgrade your hosting plan at any time from your client area with just a few clicks.</p>
-                    </div>
-                </div>
-                <!-- FAQ Item 4 -->
-                <div class="faq-item bg-white rounded-lg shadow-sm">
-                    <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                        <span class="font-semibold text-lg text-gray-800">Is a free domain included?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
-                    </button>
-                    <div class="faq-answer px-6">
-                        <p class="text-gray-600 pt-2 pb-4">A free domain name for the first year is included with our Business and Enterprise plans when you sign up for an annual subscription.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<script>
-    // This script block should be placed at the end of your HTML content.
-    
-    // Load Tailwind CSS and Lucide Icons
-    (function() {
-        if (!document.querySelector('script[src="https://cdn.tailwindcss.com"]')) {
-            const tailwindScript = document.createElement('script');
-            tailwindScript.src = 'https://cdn.tailwindcss.com';
-            document.head.appendChild(tailwindScript);
-        }
-        if (!document.querySelector('script[src="https://unpkg.com/lucide@latest"]')) {
-             const lucideScript = document.createElement('script');
-             lucideScript.src = 'https://unpkg.com/lucide@latest';
-             lucideScript.onload = () => lucide.createIcons();
-             document.head.appendChild(lucideScript);
-        } else {
-            lucide.createIcons();
-        }
-    })();
-
-    // FAQ accordion
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const wasActive = item.classList.contains('active');
-
-            // Close all other items before opening the new one
-            faqItems.forEach(otherItem => {
-                if (otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WaveHelm offers secure, scalable, and high-performance web hosting, game servers, and dedicated servers to propel your online presence.">
+    <meta name="keywords" content="web hosting, game servers, dedicated servers, minecraft hosting, rust hosting, fivem hosting, squarespace hosting">
+    <title>WaveHelm - Secure & Scalable Web Hosting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                        'wave-light': '#f0f8ff',
+                    }
                 }
-            });
-
-            // If the clicked item wasn't already active, make it active
-            if (!wasActive) {
-                item.classList.add('active');
             }
-        });
-    });
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.5s ease;
+        }
+        .gradient-bg {
+            background-color: #0a192f;
+            background-image: radial-gradient(circle at top left, rgba(0, 153, 255, 0.3), transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(0, 234, 255, 0.3), transparent 40%);
+        }
+        .wave-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        .wave-bg svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+            animation: wave-animation 10s ease-in-out infinite alternate;
+        }
+        .wave-bg .shape-fill {
+            fill: #f8fafc; /* Corresponds to bg-slate-50 */
+        }
+        .pricing-card:hover, .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 153, 255, 0.2);
+        }
+        
+        /* Keyframe Animations */
+        @keyframes wave-animation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-20px); }
+        }
 
-    // Intersection Observer for scroll animations
-    const animatedSections = document.querySelectorAll('.animated-section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                
-                // Staggered animations for cards
-                const cards = entry.target.querySelectorAll('.animated-card');
-                cards.forEach((card, index) => {
-                    card.style.animationDelay = `${index * 150}ms`;
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fade-in-down {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 234, 255, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(0, 234, 255, 0); }
+        }
+
+        /* Animation Classes */
+        .fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
+
+        .animated-section {
+            opacity: 0;
+        }
+
+        .animated-section.is-visible {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+        
+        .animated-card {
+             opacity: 0;
+        }
+        
+        .animated-section.is-visible .animated-card {
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        /* FAQ Accordion Styles */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust as needed */
+        }
+        .faq-item .faq-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm fade-in-down">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/150x50/0a192f/f0f8ff?text=WaveHelm';">
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-wave-blue transition-colors">Features</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-wave-blue transition-colors">Pricing</a>
+                    <a href="#marketing" class="text-gray-600 hover:text-wave-blue transition-colors">Marketing</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-wave-blue transition-colors">Testimonials</a>
+                    <a href="#team" class="text-gray-600 hover:text-wave-blue transition-colors">Team</a>
+                    <a href="#faq" class="text-gray-600 hover:text-wave-blue transition-colors">FAQ</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                     <a href="#pricing" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-all shadow-lg hover:shadow-sky-300/50">Get Started</a>
+                     <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                         <i data-lucide="menu"></i>
+                     </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="#features" class="text-gray-600 hover:text-wave-blue transition-colors">Features</a>
+                <a href="#pricing" class="text-gray-600 hover:text-wave-blue transition-colors">Pricing</a>
+                <a href="#marketing" class="text-gray-600 hover:text-wave-blue transition-colors">Marketing</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-wave-blue transition-colors">Testimonials</a>
+                <a href="#team" class="text-gray-600 hover:text-wave-blue transition-colors">Team</a>
+                <a href="#faq" class="text-gray-600 hover:text-wave-blue transition-colors">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative gradient-bg py-20 md:py-32 overflow-hidden">
+            <div class="container mx-auto px-6 text-center z-10 relative">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.2s; opacity:0;">Ride the Digital Wave with Confidence</h2>
+                <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.4s; opacity:0;">
+                    Blazing-fast, ultra-secure, and effortlessly scalable hosting solutions designed to propel your online presence forward.
+                </p>
+                <div class="mt-8" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.6s; opacity:0;">
+                    <a href="#pricing" class="inline-block bg-wave-cyan text-wave-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all shadow-xl hover:shadow-cyan-300/50 transform hover:-translate-y-1 pulse-button">Explore Plans</a>
+                </div>
+            </div>
+            <div class="wave-bg">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,23.5V0H0V47.35C102.4,59,221.24,68.32,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Everything You Need to Succeed</h3>
+                    <p class="text-gray-600 mt-2">Our platform is built for performance, security, and ease of use.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature Cards -->
+                    <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="zap" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Blazing Fast Speed</h4><p class="text-gray-600">Powered by NVMe SSDs and LiteSpeed servers for unparalleled performance.</p>
+                    </div>
+                    <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="shield-check" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Ironclad Security</h4><p class="text-gray-600">Free SSL, DDoS protection, and daily backups to keep your site safe.</p>
+                    </div>
+                    <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="bar-chart-2" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">Optimized & Scalable</h4><p class="text-gray-600">Optimized for platforms like WordPress & Squarespace. Upgrade resources with one click as your site grows.</p>
+                    </div>
+                    <div class="feature-card animated-card text-center p-6 bg-slate-50 rounded-lg shadow-sm transition-all duration-300">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="life-buoy" class="w-8 h-8"></i></div><h4 class="text-xl font-semibold mb-2">24/7 Expert Support</h4><p class="text-gray-600">Our friendly team is always here to help you, day or night.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-slate-50 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Flexible Hosting for Every Need</h3>
+                    <p class="text-gray-600 mt-2">Specialized pricing for websites, game servers, and dedicated hardware.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    <!-- Cards -->
+                    <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
+                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-green-100 text-green-600 mx-auto mb-4"><i data-lucide="globe" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Web Hosting</h4><p class="text-gray-500 mt-2 flex-grow">All-in-one packages to design, launch, and host your website with ease.</p><a href="web-hosting.html" class="mt-8 block w-full text-center bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors">View Plans</a>
+                    </div>
+                    <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
+                        <div class="flex items-center justify-center h-20 w-20 rounded-full bg-sky-100 text-wave-blue mx-auto mb-4"><i data-lucide="gamepad-2" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Game Hosting</h4><p class="text-gray-500 mt-2 flex-grow">High-performance servers optimized for low latency and peak gaming performance.</p><a href="game-hosting.html" class="mt-8 block w-full text-center bg-wave-blue text-white font-semibold py-3 rounded-lg hover:bg-sky-500 transition-colors">View Plans</a>
+                    </div>
+                    <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300">
+                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-slate-800 text-white mx-auto mb-4"><i data-lucide="server" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Dedicated Servers</h4><p class="text-gray-500 mt-2 flex-grow">Ultimate power and control with bare metal servers for your most demanding applications.</p><a href="dedicated-servers.html" class="mt-8 block w-full text-center bg-slate-800 text-white font-semibold py-3 rounded-lg hover:bg-slate-900 transition-colors">View Plans</a>
+                    </div>
+                     <div class="pricing-card animated-card bg-white rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-all duration-300 border-2 border-wave-cyan">
+                         <div class="flex items-center justify-center h-20 w-20 rounded-full bg-cyan-100 text-wave-cyan mx-auto mb-4"><i data-lucide="sliders-horizontal" class="w-10 h-10"></i></div><h4 class="text-2xl font-bold text-gray-900">Custom Build</h4><p class="text-gray-500 mt-2 flex-grow">Configure your own server from the ground up with our easy-to-use builder.</p><a href="configure-server.html" class="mt-8 block w-full text-center bg-wave-cyan text-wave-dark font-semibold py-3 rounded-lg hover:bg-cyan-300 transition-colors">Configure Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketing Services Section -->
+        <section id="marketing" class="py-20 bg-white animated-section">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Amplify Your Reach with Expert Marketing</h2>
+                        <p class="text-lg text-gray-600 mt-4">Beyond hosting, we help you grow. Our marketing services are designed to boost your visibility, engage your audience, and drive conversions.</p>
+                        <ul class="space-y-3 mt-6 text-gray-600">
+                             <li class="flex items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Search Engine Optimization (SEO)</li>
+                             <li class="flex items-center"><i data-lucide="megaphone" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Social Media Management</li>
+                             <li class="flex items-center"><i data-lucide="mail-check" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Email Marketing Campaigns</li>
+                             <li class="flex items-center"><i data-lucide="file-text" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Content Creation & Strategy</li>
+                        </ul>
+                        <a href="marketing-services.html" class="mt-8 inline-block bg-wave-blue text-white font-semibold py-3 px-8 rounded-lg hover:bg-sky-500 transition-colors shadow-lg hover:shadow-sky-300/50">Explore Marketing Services</a>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="https://i.imgur.com/ZtYX3B7.png" alt="WaveHelm marketing banner" class="rounded-lg shadow-xl w-full h-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0099ff/ffffff?text=Marketing+Growth';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 bg-slate-50 animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Loved by Developers Worldwide</h3>
+                    <p class="text-gray-600 mt-2">Don't just take our word for it. Here's what our customers say.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial Cards -->
+                    <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"WaveHelm is hands down the fastest and most reliable hosting I've ever used. My site's performance has skyrocketed since I switched."</p><div class="flex items-center"><img src="https://placehold.co/48x48/E0E7FF/4F46E5?text=JS" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Jane Smith</p><p class="text-gray-500 text-sm">Founder of TechGlow</p></div></div></div>
+                    <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"The 24/7 support is a lifesaver. They are knowledgeable, friendly, and resolved my issue within minutes. Highly recommended!"</p><div class="flex items-center"><img src="https://placehold.co/48x48/DBEAFE/1D4ED8?text=MD" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Michael Doe</p><p class="text-gray-500 text-sm">Freelance Developer</p></div></div></div>
+                    <div class="animated-card bg-white p-8 rounded-lg shadow-md"><p class="text-gray-700 mb-6">"Migrating to WaveHelm was seamless. Their control panel is intuitive and makes managing my websites a breeze. A+ service!"</p><div class="flex items-center"><img src="https://placehold.co/48x48/C7D2FE/4338CA?text=AK" alt="User Avatar" class="w-12 h-12 rounded-full mr-4"><div><p class="font-semibold text-gray-900">Alice Kim</p><p class="text-gray-500 text-sm">E-commerce Store Owner</p></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-20 bg-white animated-section">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Meet Our Leadership</h3>
+                    <p class="text-gray-600 mt-2">The driving force behind our innovation and customer success.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Team Cards -->
+                    <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=GS" alt="Garret Shoemaker" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Garret Shoemaker</h4><p class="text-wave-blue font-semibold">Founder & CEO</p><p class="text-gray-600 mt-2 text-sm">Garret is the visionary founder of WaveHelm, dedicated to making web hosting simple, fast, and accessible for everyone.</p></div>
+                    <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=DC" alt="Daniel Cartwright" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Daniel Cartwright</h4><p class="text-wave-blue font-semibold">Chief Operating Officer</p><p class="text-gray-600 mt-2 text-sm">Daniel oversees daily operations, ensuring our infrastructure is robust, secure, and always running at peak performance.</p></div>
+                    <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=RM" alt="Ryan Mahoney" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Ryan Mahoney</h4><p class="text-wave-blue font-semibold">Chief Marketing & Sales Officer</p><p class="text-gray-600 mt-2 text-sm">Ryan leads our growth strategies, connecting with customers and sharing the WaveHelm story with the world.</p></div>
+                    <div class="team-card animated-card text-center bg-slate-50 p-6 rounded-lg shadow-md"><img src="https://placehold.co/128x128/a1c4fd/1E3A8A?text=AS" alt="Alexis Sappington" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-wave-blue"><h4 class="text-xl font-bold text-gray-900">Alexis Sappington</h4><p class="text-wave-blue font-semibold">Chief Human Resources Officer</p><p class="text-gray-600 mt-2 text-sm">Alexis cultivates our amazing company culture and empowers the talented individuals who make WaveHelm great.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-slate-50 animated-section">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h3>
+                    <p class="text-gray-600 mt-2">Have questions? We have answers.</p>
+                </div>
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">What payment methods do you accept?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">We accept all major credit cards (Visa, Mastercard, American Express) and PayPal.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Do you offer a money-back guarantee?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">Yes, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, just contact us within 7 days for a full refund.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Can I upgrade my plan later?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">Absolutely! You can upgrade or downgrade your hosting plan at any time from your client area with just a few clicks.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Is a free domain included?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">A free domain name for the first year is included with our Business and Enterprise plans when you sign up for an annual subscription.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wave-dark text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4" onerror="this.onerror=null; this.src='https://placehold.co/150x50/0a192f/f0f8ff?text=WaveHelm';">
+                    <p class="text-slate-400">Secure & Scalable Web Hosting</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Products</h5>
+                    <ul class="space-y-2">
+                        <li><a href="web-hosting.html" class="text-slate-400 hover:text-white">Web Hosting</a></li>
+                        <li><a href="game-hosting.html" class="text-slate-400 hover:text-white">Game Hosting</a></li>
+                        <li><a href="dedicated-servers.html" class="text-slate-400 hover:text-white">Dedicated Servers</a></li>
+                        <li><a href="marketing-services.html" class="text-slate-400 hover:text-white">Marketing Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Company</h5>
+                    <ul class="space-y-2">
+                        <li><a href="about-us.html" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="contact-us.html" class="text-slate-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="text-lg font-semibold mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="terms-of-service.html" class="text-slate-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html" class="text-slate-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-slate-700 pt-8 text-center text-slate-500">
+                <p>&copy; 2025 WaveHelm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if(mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // FAQ accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const wasActive = item.classList.contains('active');
+
+                // Close all other items before opening the new one
+                faqItems.forEach(otherItem => {
+                    if (otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
                 });
 
-                observer.unobserve(entry.target);
-            }
+                // If the clicked item wasn't already active, make it active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
         });
-    }, {
-        threshold: 0.1
-    });
 
-    animatedSections.forEach(section => {
-        observer.observe(section);
-    });
-</script>
+        // Intersection Observer for scroll animations
+        const animatedSections = document.querySelectorAll('.animated-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Staggered animations for cards
+                    const cards = entry.target.querySelectorAll('.animated-card');
+                    cards.forEach((card, index) => {
+                        card.style.animationDelay = `${index * 150}ms`;
+                    });
+
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedSections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
 
 
 
