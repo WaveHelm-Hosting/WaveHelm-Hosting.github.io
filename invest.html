@@ -34,7 +34,6 @@
 </head>
 <body class="bg-slate-50 text-gray-800">
 
-    <!-- Header -->
     <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
         <div class="container mx-auto px-6 py-2">
             <div class="flex items-center justify-between">
@@ -46,7 +45,6 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
         <section class="py-20 bg-white">
             <div class="container mx-auto px-6 text-center">
@@ -58,14 +56,13 @@
         <section id="invest" class="py-20 bg-slate-50">
             <div class="container mx-auto px-6 max-w-3xl">
                 <div class="bg-white rounded-xl shadow-2xl p-8 flex flex-col md:flex-row items-center gap-8">
-                    <!-- Left Side: Calculator -->
                     <div class="w-full md:w-1/2">
                         <h2 class="text-3xl font-bold text-gray-900 mb-4">Purchase Shares</h2>
                         <div class="mb-6">
-                            <label for="shares-input" class="block text-lg font-semibold mb-2">Number of Shares:</label>
+                            <label for="shares-input" class="block text-lg font-semibold mb-2">Number of Shares (Max 100):</label>
                             <div class="flex items-center">
                                 <button id="decrement-btn" class="px-4 py-2 bg-slate-200 rounded-l-lg hover:bg-slate-300">-</button>
-                                <input type="number" id="shares-input" value="1" min="1" class="w-full text-center text-2xl font-bold border-t border-b border-gray-200 py-2">
+                                <input type="number" id="shares-input" value="1" min="1" max="100" class="w-full text-center text-2xl font-bold border-t border-b border-gray-200 py-2">
                                 <button id="increment-btn" class="px-4 py-2 bg-slate-200 rounded-r-lg hover:bg-slate-300">+</button>
                             </div>
                         </div>
@@ -80,7 +77,6 @@
                             <p class="text-xs text-gray-500 mt-2 text-center">You will be redirected to our secure Squarespace checkout.</p>
                         </div>
                     </div>
-                    <!-- Right Side: Details -->
                     <div class="w-full md:w-1/2">
                         <div class="bg-slate-100 p-6 rounded-lg">
                             <h3 class="text-xl font-bold mb-4">Investment Details</h3>
@@ -89,13 +85,17 @@
                                     <span>Price per Share:</span>
                                     <span class="font-semibold">$50.00 USD</span>
                                 </div>
+                                <div class="flex justify-between text-wave-blue">
+                                    <span>Your Equity Stake:</span>
+                                    <span class="font-semibold" id="equity-stake-display">0.1%</span>
+                                </div>
                                 <div class="flex justify-between">
                                     <span>Company Equity Owned:</span>
                                     <span class="font-semibold">76%</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span>Equity Available:</span>
-                                    <span class="font-semibold text-wave-blue">24%</span>
+                                    <span class="font-semibold">24%</span>
                                 </div>
                             </div>
                             <div class="mt-6">
@@ -114,7 +114,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-wave-dark text-white">
         <div class="container mx-auto px-6 py-12">
             <div class="mt-8 border-t border-slate-700 pt-8 text-center text-slate-500">
@@ -128,32 +127,47 @@
 
         const sharesInput = document.getElementById('shares-input');
         const priceDisplay = document.getElementById('price-display');
+        const equityStakeDisplay = document.getElementById('equity-stake-display');
         const decrementBtn = document.getElementById('decrement-btn');
         const incrementBtn = document.getElementById('increment-btn');
         const investBtn = document.getElementById('invest-now-btn');
         
         const SHARE_PRICE = 50;
+        const MAX_SHARES = 100;
+        const PERCENT_PER_SHARE = 0.1; // Since 10 shares is 1%, 1 share is 0.1%
 
-        function updatePrice() {
-            const numShares = parseInt(sharesInput.value) || 0;
+        function updateInvestmentDetails() {
+            let numShares = parseInt(sharesInput.value) || 0;
+            if (numShares > MAX_SHARES) {
+                numShares = MAX_SHARES;
+                sharesInput.value = MAX_SHARES;
+            }
+            
+            // Calculate and display total price
             const total = numShares * SHARE_PRICE;
             priceDisplay.textContent = total.toFixed(2);
+
+            // Calculate and display equity stake
+            const equityStake = numShares * PERCENT_PER_SHARE;
+            equityStakeDisplay.textContent = equityStake.toFixed(1) + '%';
         }
 
-        sharesInput.addEventListener('input', updatePrice);
+        sharesInput.addEventListener('input', updateInvestmentDetails);
         decrementBtn.addEventListener('click', () => {
             if (sharesInput.value > 1) {
                 sharesInput.value--;
-                updatePrice();
+                updateInvestmentDetails();
             }
         });
         incrementBtn.addEventListener('click', () => {
-            sharesInput.value++;
-            updatePrice();
+            if (parseInt(sharesInput.value) < MAX_SHARES) {
+                sharesInput.value++;
+                updateInvestmentDetails();
+            }
         });
 
-        // Initial price calculation
-        updatePrice();
+        // Initial calculation on page load
+        updateInvestmentDetails();
     </script>
 </body>
 </html>
