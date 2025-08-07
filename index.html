@@ -58,9 +58,6 @@
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 25px 50px -12px rgba(0, 153, 255, 0.2);
         }
-        .faq-question {
-            cursor: pointer;
-        }
         
         /* Keyframe Animations */
         @keyframes wave-animation {
@@ -84,9 +81,7 @@
         }
 
         /* Animation Classes */
-        .fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
         .fade-in-down { animation: fade-in-down 0.6s ease-out forwards; }
-        .pulse-button { animation: pulse 2s infinite; }
 
         .animated-section {
             opacity: 0;
@@ -104,30 +99,31 @@
             animation: fade-in-up 0.8s ease-out forwards;
         }
 
+        /* FAQ Accordion Styles */
         .faq-answer {
-            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.4s ease-in-out;
             max-height: 0;
             overflow: hidden;
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            opacity: 0;
+            transition: max-height 0.5s ease-in-out;
         }
-        .faq-answer.open {
+        .faq-item.active .faq-answer {
             max-height: 200px; /* Adjust as needed */
-            padding-top: 0 !important;
-            padding-bottom: 1.5rem !important;
-            opacity: 1;
+        }
+        .faq-item .faq-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
     </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
 
     <!-- Header -->
-    <header id="header" class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm fade-in-down">
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm fade-in-down">
         <div class="container mx-auto px-6 py-2">
             <div class="flex items-center justify-between">
                 <a href="/" class="flex items-center space-x-2">
-                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12" onerror="this.onerror=null; this.src='https://placehold.co/150x50/0a192f/f0f8ff?text=WaveHelm';">
                 </a>
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#features" class="text-gray-600 hover:text-wave-blue transition-colors">Features</a>
@@ -140,8 +136,8 @@
                 <div class="flex items-center space-x-4">
                      <a href="#pricing" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-all shadow-lg hover:shadow-sky-300/50">Get Started</a>
                      <button id="mobile-menu-button" class="md:hidden text-gray-700">
-                        <i data-lucide="menu"></i>
-                    </button>
+                         <i data-lucide="menu"></i>
+                     </button>
                 </div>
             </div>
         </div>
@@ -163,11 +159,11 @@
         <!-- Hero Section -->
         <section class="relative gradient-bg py-20 md:py-32 overflow-hidden">
             <div class="container mx-auto px-6 text-center z-10 relative">
-                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight fade-in-up" style="animation-delay: 0.2s;">Ride the Digital Wave with Confidence</h2>
-                <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto fade-in-up" style="animation-delay: 0.4s;">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.2s; opacity:0;">Ride the Digital Wave with Confidence</h2>
+                <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.4s; opacity:0;">
                     Blazing-fast, ultra-secure, and effortlessly scalable hosting solutions designed to propel your online presence forward.
                 </p>
-                <div class="mt-8 fade-in-up" style="animation-delay: 0.6s;">
+                <div class="mt-8" style="animation: fade-in-up 0.8s ease-out forwards; animation-delay: 0.6s; opacity:0;">
                     <a href="#pricing" class="inline-block bg-wave-cyan text-wave-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all shadow-xl hover:shadow-cyan-300/50 transform hover:-translate-y-1 pulse-button">Explore Plans</a>
                 </div>
             </div>
@@ -231,14 +227,20 @@
         <!-- Marketing Services Section -->
         <section id="marketing" class="py-20 bg-white animated-section">
             <div class="container mx-auto px-6">
-                <div class="bg-slate-100 rounded-lg p-12 text-center flex flex-col items-center">
-                    <div class="flex items-center justify-center h-20 w-20 rounded-full bg-wave-blue text-white mx-auto mb-4">
-                        <i data-lucide="megaphone" class="w-10 h-10"></i>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Amplify Your Reach with Expert Marketing</h2>
+                        <p class="text-lg text-gray-600 mt-4">Beyond hosting, we help you grow. Our marketing services are designed to boost your visibility, engage your audience, and drive conversions.</p>
+                        <ul class="space-y-3 mt-6 text-gray-600">
+                             <li class="flex items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Search Engine Optimization (SEO)</li>
+                             <li class="flex items-center"><i data-lucide="megaphone" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Social Media Management</li>
+                             <li class="flex items-center"><i data-lucide="mail-check" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Email Marketing Campaigns</li>
+                             <li class="flex items-center"><i data-lucide="file-text" class="w-5 h-5 text-wave-blue mr-3 flex-shrink-0"></i>Content Creation & Strategy</li>
+                        </ul>
+                        <a href="marketing-services.html" class="mt-8 inline-block bg-wave-blue text-white font-semibold py-3 px-8 rounded-lg hover:bg-sky-500 transition-colors shadow-lg hover:shadow-sky-300/50">Explore Marketing Services</a>
                     </div>
-                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Supercharge Your Growth</h3>
-                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Your online presence is more than just a server. We offer a full suite of marketing services, from SEO to social media management, to help you reach a wider audience and grow your brand.</p>
-                    <div class="mt-8">
-                        <a href="marketing-services.html" class="bg-wave-blue text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-sky-500 transition-all shadow-lg hover:shadow-sky-300/50 transform hover:-translate-y-1">Explore Marketing Services</a>
+                    <div class="md:w-1/2">
+                        <img src="https://i.imgur.com/ZtYX3B7.png" alt="WaveHelm marketing banner" class="rounded-lg shadow-xl w-full h-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0099ff/ffffff?text=Marketing+Growth';">
                     </div>
                 </div>
             </div>
@@ -285,11 +287,46 @@
                     <p class="text-gray-600 mt-2">Have questions? We have answers.</p>
                 </div>
                 <div class="space-y-4">
-                    <!-- FAQ Items -->
-                    <div class="bg-white rounded-lg shadow-sm"><div class="faq-question flex justify-between items-center p-6"><h4 class="font-semibold text-lg">What payment methods do you accept?</h4><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></div><div class="faq-answer p-6 text-gray-600"><p>We accept all major credit cards (Visa, Mastercard, American Express) and PayPal.</p></div></div>
-                    <div class="bg-white rounded-lg shadow-sm"><div class="faq-question flex justify-between items-center p-6"><h4 class="font-semibold text-lg">Do you offer a money-back guarantee?</h4><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></div><div class="faq-answer p-6 text-gray-600"><p>Yes, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, just contact us within 7 days for a full refund.</p></div></div>
-                    <div class="bg-white rounded-lg shadow-sm"><div class="faq-question flex justify-between items-center p-6"><h4 class="font-semibold text-lg">Can I upgrade my plan later?</h4><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></div><div class="faq-answer p-6 text-gray-600"><p>Absolutely! You can upgrade or downgrade your hosting plan at any time from your client area with just a few clicks.</p></div></div>
-                    <div class="bg-white rounded-lg shadow-sm"><div class="faq-question flex justify-between items-center p-6"><h4 class="font-semibold text-lg">Is a free domain included?</h4><i data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i></div><div class="faq-answer p-6 text-gray-600"><p>A free domain name for the first year is included with our Business and Enterprise plans when you sign up for an annual subscription.</p></div></div>
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">What payment methods do you accept?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">We accept all major credit cards (Visa, Mastercard, American Express) and PayPal.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Do you offer a money-back guarantee?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">Yes, we offer a 7-day money-back guarantee. If you're not satisfied for any reason, just contact us within 7 days for a full refund.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Can I upgrade my plan later?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">Absolutely! You can upgrade or downgrade your hosting plan at any time from your client area with just a few clicks.</p>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-6">
+                            <span class="font-semibold text-lg text-gray-800">Is a free domain included?</span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-wave-blue faq-icon"></i>
+                        </button>
+                        <div class="faq-answer px-6">
+                            <p class="text-gray-600 pt-2 pb-4">A free domain name for the first year is included with our Business and Enterprise plans when you sign up for an annual subscription.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -300,7 +337,7 @@
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4" onerror="this.onerror=null; this.src='https://placehold.co/150x50/0a192f/f0f8ff?text=WaveHelm';">
                     <p class="text-slate-400">Secure & Scalable Web Hosting</p>
                 </div>
                 <div>
@@ -341,28 +378,29 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if(mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
         
         // FAQ accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-                const isCurrentlyOpen = answer.classList.contains('open');
+                const wasActive = item.classList.contains('active');
 
-                // First, close all answers
-                document.querySelectorAll('.faq-answer').forEach(ans => {
-                    ans.classList.remove('open');
-                    ans.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                // Close all other items before opening the new one
+                faqItems.forEach(otherItem => {
+                    if (otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
                 });
 
-                // If the clicked one was not already open, open it
-                if (!isCurrentlyOpen) {
-                    answer.classList.add('open');
-                    icon.classList.add('rotate-180');
+                // If the clicked item wasn't already active, make it active
+                if (!wasActive) {
+                    item.classList.add('active');
                 }
             });
         });
@@ -393,8 +431,6 @@
     </script>
 </body>
 </html>
-
-
 
 
 
