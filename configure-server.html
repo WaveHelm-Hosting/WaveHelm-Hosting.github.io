@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm - Configure Your Server</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                        'wave-light': '#f0f8ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for range sliders */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #d1d5db; /* gray-300 */
+            border-radius: 5px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #0099ff; /* wave-blue */
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 5px rgba(0,153,255,0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                </a>
+                <a href="/" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-shadow shadow-lg hover:shadow-sky-300/50">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Build Your Custom Server</h1>
+                <p class="text-lg text-gray-600 mt-4">Select your options to configure the perfect server for your needs. The price will update in real-time.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-2xl p-8">
+                <!-- Tabs -->
+                <div class="mb-8 border-b border-gray-200">
+                    <nav class="flex space-x-8" aria-label="Tabs">
+                        <button id="tab-web" class="tab-button text-wave-blue border-b-2 border-wave-blue px-3 py-4 text-lg font-semibold">
+                            Web Server
+                        </button>
+                        <button id="tab-game" class="tab-button text-gray-500 hover:text-gray-700 px-3 py-4 text-lg font-semibold">
+                            Game Server
+                        </button>
+                    </nav>
+                </div>
+
+                <div id="config-panel">
+                    <!-- Options will be dynamically inserted here -->
+                </div>
+
+                <!-- Price and Order Section -->
+                <div class="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center md:text-left mb-4 md:mb-0">
+                        <p class="text-gray-600 text-lg">Monthly Price:</p>
+                        <p class="text-5xl font-extrabold text-wave-dark">$<span id="price-display">0.00</span></p>
+                    </div>
+                    <button id="review-order-btn" class="bg-wave-cyan text-wave-dark font-bold text-lg px-12 py-4 rounded-full hover:bg-cyan-300 transition-all shadow-lg hover:shadow-cyan-300/50 transform hover:-translate-y-1">
+                        Review Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wave-dark text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12 mb-4">
+                    <p class="text-slate-400">Secure & Scalable Web Hosting</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Products</h5>
+                    <ul class="space-y-2">
+                        <li><a href="web-hosting.html" class="text-slate-400 hover:text-white">Web Hosting</a></li>
+                        <li><a href="game-hosting.html" class="text-slate-400 hover:text-white">Game Hosting</a></li>
+                        <li><a href="dedicated-servers.html" class="text-slate-400 hover:text-white">Dedicated Servers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold mb-4">Company</h5>
+                    <ul class="space-y-2">
+                        <li><a href="about-us.html" class="text-slate-400 hover:text-white">About Us</a></li>
+                        <li><a href="contact-us.html" class="text-slate-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h5 class="text-lg font-semibold mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="terms-of-service.html" class="text-slate-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html" class="text-slate-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-slate-700 pt-8 text-center text-slate-500">
+                <p>&copy; 2025 WaveHelm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const configPanel = document.getElementById('config-panel');
+        const priceDisplay = document.getElementById('price-display');
+        const reviewOrderBtn = document.getElementById('review-order-btn');
+        const webTab = document.getElementById('tab-web');
+        const gameTab = document.getElementById('tab-game');
+
+        let currentConfig = {};
+        let serverType = 'Web';
+
+        const pricing = {
+            web: {
+                base: 35.00, // Base price for 4 cores, 4GB RAM, 50GB Storage, 1TB Bandwidth
+                cpu: 2.00, // Price per core ABOVE the base
+                ram: 2.50, // Price per GB ABOVE the base
+                storage: 0.10, // Price per GB ABOVE the base
+                bandwidth: 0.50 // Price per TB ABOVE the base
+            },
+            game: {
+                base: 15.00, // Base price for 4 cores, 4GB RAM, 60GB Storage
+                cpu: 1.50, // Price per core ABOVE the base
+                ram: 1.00, // Price per GB ABOVE the base
+                storage: 0.08, // Price per GB ABOVE the base
+                priority: 5.00
+            }
+        };
+
+        const webConfig = [
+            { id: 'cpu', label: 'CPU Cores', type: 'radio', options: [4, 6, 8], value: 4, unit: 'Cores', base: 4 },
+            { id: 'ram', label: 'RAM', type: 'radio', options: [4, 8, 16, 32], value: 4, unit: 'GB', base: 4 },
+            { id: 'storage', label: 'NVMe Storage', min: 50, max: 500, step: 10, value: 50, unit: 'GB', base: 50 },
+            { id: 'bandwidth', label: 'Bandwidth', min: 1, max: 20, step: 1, value: 1, unit: 'TB', base: 1 }
+        ];
+
+        const gameConfig = [
+            { id: 'cpu', label: 'CPU Cores', type: 'radio', options: [4, 6, 8], value: 4, unit: 'Cores', base: 4 },
+            { id: 'ram', label: 'RAM', type: 'radio', options: [4, 8, 16, 32], value: 4, unit: 'GB', base: 4 },
+            { id: 'storage', label: 'NVMe Storage', min: 60, max: 500, step: 10, value: 60, unit: 'GB', base: 60 },
+            { id: 'priority', label: 'CPU Priority', type: 'toggle', value: 0, unit: 'High' }
+        ];
+
+        function createOptionControl(option) {
+            if (option.type === 'radio') {
+                const optionsHtml = option.options.map(optValue => `
+                    <div>
+                        <input type="radio" id="${option.id}-${optValue}" name="${option.id}" value="${optValue}" class="peer hidden config-input" data-id="${option.id}" ${option.value === optValue ? 'checked' : ''}>
+                        <label for="${option.id}-${optValue}" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-wave-blue peer-checked:font-bold peer-checked:text-white border border-gray-200 hover:bg-gray-100">${optValue} ${option.unit}</label>
+                    </div>
+                `).join('');
+                return `
+                    <div class="mb-8">
+                        <label class="font-semibold text-lg mb-3 block">${option.label}</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+            if (option.type === 'toggle') {
+                return `
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="font-semibold text-lg">${option.label}</label>
+                            <div class="flex items-center">
+                                <span class="text-gray-500 mr-3">Standard</span>
+                                <label for="${option.id}-toggle" class="inline-flex relative items-center cursor-pointer">
+                                    <input type="checkbox" value="1" id="${option.id}-toggle" class="sr-only peer config-input" data-id="${option.id}">
+                                    <div class="w-14 h-8 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-wave-blue"></div>
+                                </label>
+                                <span class="font-semibold text-wave-blue ml-3">${option.unit}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            // Default to slider
+            return `
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <label for="${option.id}-slider" class="font-semibold text-lg">${option.label}</label>
+                        <span id="${option.id}-value" class="font-bold text-xl text-wave-blue">${option.value} ${option.unit}</span>
+                    </div>
+                    <input type="range" id="${option.id}-slider" class="config-input" data-id="${option.id}"
+                           min="${option.min}" max="${option.max}" step="${option.step}" value="${option.value}">
+                </div>
+            `;
+        }
+        
+        function renderConfig(config) {
+            configPanel.innerHTML = config.map(createOptionControl).join('');
+            updatePrice();
+            addEventListeners();
+        }
+
+        function calculatePrice() {
+            let total = 0;
+            const rates = pricing[serverType.toLowerCase()];
+            const config = serverType === 'Web' ? webConfig : gameConfig;
+            
+            total = rates.base;
+
+            for (const key in currentConfig) {
+                const option = config.find(o => o.id === key);
+                if (option && option.base !== undefined) {
+                    total += (currentConfig[key] - option.base) * rates[key];
+                } else if (key === 'priority' && currentConfig[key] === 1) {
+                    total += rates.priority;
+                }
+            }
+            return total.toFixed(2);
+        }
+
+        function updatePrice() {
+            // Update currentConfig object from inputs
+            document.querySelectorAll('.config-input').forEach(input => {
+                const id = input.dataset.id;
+                if (input.type === 'radio') {
+                    if (input.checked) {
+                        currentConfig[id] = parseFloat(input.value);
+                    }
+                } else if (input.type === 'checkbox') {
+                    currentConfig[id] = input.checked ? 1 : 0;
+                } else { // slider
+                    currentConfig[id] = parseFloat(input.value);
+                    const valueDisplay = document.getElementById(`${id}-value`);
+                    if (valueDisplay) {
+                        const option = (serverType === 'Web' ? webConfig : gameConfig).find(o => o.id === id);
+                        valueDisplay.textContent = `${input.value} ${option.unit}`;
+                    }
+                }
+            });
+            priceDisplay.textContent = calculatePrice();
+        }
+        
+        function addEventListeners() {
+            document.querySelectorAll('.config-input').forEach(input => {
+                input.addEventListener('input', updatePrice);
+            });
+        }
+
+        function switchTab(type) {
+            serverType = type;
+            if (type === 'Web') {
+                webTab.classList.add('text-wave-blue', 'border-wave-blue');
+                webTab.classList.remove('text-gray-500', 'hover:text-gray-700');
+                gameTab.classList.remove('text-wave-blue', 'border-wave-blue');
+                gameTab.classList.add('text-gray-500', 'hover:text-gray-700');
+                renderConfig(webConfig);
+            } else {
+                gameTab.classList.add('text-wave-blue', 'border-wave-blue');
+                gameTab.classList.remove('text-gray-500', 'hover:text-gray-700');
+                webTab.classList.remove('text-wave-blue', 'border-wave-blue');
+                webTab.classList.add('text-gray-500', 'hover:text-gray-700');
+                renderConfig(gameConfig);
+            }
+        }
+
+        webTab.addEventListener('click', () => switchTab('Web'));
+        gameTab.addEventListener('click', () => switchTab('Game'));
+
+        reviewOrderBtn.addEventListener('click', () => {
+            const orderDetails = {
+                type: serverType,
+                config: currentConfig,
+                price: calculatePrice()
+            };
+            localStorage.setItem('waveHelmOrder', JSON.stringify(orderDetails));
+            window.location.href = 'order-receipt.html';
+        });
+
+        // Initial load
+        switchTab('Web');
+    </script>
+</body>
+</html>
