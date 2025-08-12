@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm - Client Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                </a>
+                <button id="sign-out-btn" class="bg-slate-200 text-slate-800 px-5 py-2 rounded-full font-semibold hover:bg-slate-300 transition-colors">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900">Welcome to Your Portal</h1>
+                <p id="welcome-message" class="text-lg text-gray-600 mt-4">Loading your details...</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-xl p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-wave-dark">Your Services</h2>
+                    <a href="/configure-server.html" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-colors text-sm">
+                        <i data-lucide="plus" class="inline-block w-4 h-4 mr-1"></i> Add New Service
+                    </a>
+                </div>
+                <div id="services-container" class="overflow-x-auto">
+                    <!-- Services will be loaded here -->
+                    <p id="loading-services" class="text-gray-500">Loading your services...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, query, where, onSnapshot, doc, getDoc, setDoc, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // IMPORTANT: These are placeholder variables.
+        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{"apiKey":"AIza...","authDomain":"...","projectId":"..."}';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let firebaseConfig;
+        try {
+            firebaseConfig = JSON.parse(firebaseConfigStr);
+        } catch (e) {
+            console.error("Firebase config is not a valid JSON string.");
+            firebaseConfig = { apiKey: "dummy", authDomain: "dummy.firebaseapp.com", projectId: "dummy" };
+        }
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // UI Elements
+        const welcomeMessage = document.getElementById('welcome-message');
+        const signOutBtn = document.getElementById('sign-out-btn');
+        const servicesContainer = document.getElementById('services-container');
+        const loadingServicesText = document.getElementById('loading-services');
+
+        let servicesUnsubscribe = null;
+
+        // --- Authentication Logic ---
+        onAuthStateChanged(auth, user => {
+            if (user && !user.isAnonymous) {
+                // User is signed in
+                welcomeMessage.textContent = `You are signed in as ${user.email}`;
+                loadServices(user.uid);
+            } else {
+                // User is signed out or anonymous, redirect to login page
+                if (servicesUnsubscribe) servicesUnsubscribe();
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Handle sign out
+        signOutBtn.addEventListener('click', async () => {
+            try {
+                if (servicesUnsubscribe) servicesUnsubscribe();
+                await signOut(auth);
+                // onAuthStateChanged will handle the redirect
+            } catch (error) {
+                console.error("Sign out error:", error);
+            }
+        });
+        
+        // --- Firestore Logic ---
+        function loadServices(userId) {
+            const servicesRef = collection(db, `artifacts/${appId}/users/${userId}/services`);
+            const q = query(servicesRef);
+
+            if (servicesUnsubscribe) servicesUnsubscribe();
+
+            servicesUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                loadingServicesText.classList.add('hidden');
+                if (querySnapshot.empty) {
+                    servicesContainer.innerHTML = '<p class="text-gray-500">You have no active services. Click "Add New Service" to get started!</p>';
+                    return;
+                }
+                
+                let servicesHtml = `
+                    <table class="w-full text-left">
+                        <thead class="text-xs text-gray-700 uppercase bg-slate-100">
+                            <tr>
+                                <th class="px-6 py-3">Service Type</th>
+                                <th class="px-6 py-3">Key Specs</th>
+                                <th class="px-6 py-3">Price</th>
+                                <th class="px-6 py-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                querySnapshot.forEach((doc) => {
+                    const service = doc.data();
+                    let specs = '';
+                    if(service.config) {
+                        specs = `${service.config.cpu} Cores, ${service.config.ram}GB RAM, ${service.config.storage}GB SSD`;
+                    }
+
+                    servicesHtml += `
+                        <tr class="bg-white border-b">
+                            <td class="px-6 py-4 font-semibold">${service.type || 'N/A'}</td>
+                            <td class="px-6 py-4">${specs}</td>
+                            <td class="px-6 py-4 font-semibold">$${service.price || 'N/A'}</td>
+                            <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Active</span></td>
+                        </tr>
+                    `;
+                });
+
+                servicesHtml += '</tbody></table>';
+                servicesContainer.innerHTML = servicesHtml;
+
+            }, (error) => {
+                console.error("Error loading services: ", error);
+                loadingServicesText.textContent = "Error loading services.";
+            });
+        }
+        
+        // Check for and add order from configurator
+        async function checkAndAddOrder() {
+            const orderDetailsStr = localStorage.getItem('waveHelmOrder');
+            if (orderDetailsStr) {
+                const orderDetails = JSON.parse(orderDetailsStr);
+                const user = auth.currentUser;
+                if (user && !user.isAnonymous) {
+                    try {
+                        const servicesRef = collection(db, `artifacts/${appId}/users/${user.uid}/services`);
+                        await addDoc(servicesRef, {
+                            ...orderDetails,
+                            createdAt: serverTimestamp()
+                        });
+                        // Clear the item from localStorage so it's not added again
+                        localStorage.removeItem('waveHelmOrder');
+                    } catch (error) {
+                        console.error("Error adding document: ", error);
+                    }
+                }
+            }
+        }
+        
+        // Initial sign-in attempt
+        async function initialSignIn() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    // This page requires a real user, so if there's no token, we let onAuthStateChanged redirect.
+                    if (!auth.currentUser) {
+                         // A brief delay to allow onAuthStateChanged to fire first
+                         setTimeout(() => {
+                            if (!auth.currentUser) {
+                                window.location.href = 'login.html';
+                            }
+                         }, 1000);
+                    }
+                }
+                await checkAndAddOrder();
+            } catch (error) {
+                console.error("Initial sign-in failed:", error);
+                 window.location.href = 'login.html';
+            }
+        }
+
+        initialSignIn();
+        
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
