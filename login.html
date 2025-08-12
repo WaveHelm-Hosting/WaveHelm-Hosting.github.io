@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-2">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-2">
+                    <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Logo" class="h-12">
+                </a>
+                <a href="/" class="bg-wave-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-sky-500 transition-shadow shadow-lg hover:shadow-sky-300/50">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div>
+                <h2 id="form-title" class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    Sign in to your account
+                </h2>
+            </div>
+            <div class="bg-white rounded-xl shadow-2xl p-8 space-y-6">
+                <div id="message-box" class="hidden p-4 rounded-md text-sm"></div>
+                <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-wave-blue focus:border-wave-blue focus:z-10 sm:text-sm" placeholder="Email address">
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-md relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-wave-blue focus:border-wave-blue focus:z-10 sm:text-sm" placeholder="Password">
+                
+                <div>
+                    <button id="submit-btn" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-wave-blue hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wave-blue transition-colors">
+                        Sign in
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-600">
+                    <span id="prompt-text">Don't have an account?</span>
+                    <a href="#" id="toggle-form" class="font-medium text-wave-blue hover:text-sky-500">
+                        Sign up
+                    </a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signInAnonymously,
+            signInWithCustomToken
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // IMPORTANT: These are placeholder variables.
+        // In a real environment, __firebase_config and __initial_auth_token would be provided.
+        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : '{"apiKey":"AIza...","authDomain":"...","projectId":"..."}';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        let firebaseConfig;
+        try {
+            firebaseConfig = JSON.parse(firebaseConfigStr);
+        } catch (e) {
+            console.error("Firebase config is not a valid JSON string.");
+            // Use a dummy config to prevent app from crashing
+            firebaseConfig = { apiKey: "dummy", authDomain: "dummy.firebaseapp.com", projectId: "dummy" };
+        }
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI Elements
+        const formTitle = document.getElementById('form-title');
+        const submitBtn = document.getElementById('submit-btn');
+        const toggleFormLink = document.getElementById('toggle-form');
+        const promptText = document.getElementById('prompt-text');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const messageBox = document.getElementById('message-box');
+
+        let isLogin = true;
+
+        // --- Authentication Logic ---
+
+        // Listen for auth state changes
+        onAuthStateChanged(auth, user => {
+            if (user && !user.isAnonymous) {
+                // If user is logged in (and not anonymous), redirect to portal
+                window.location.href = 'portal.html';
+            }
+        });
+        
+        // Function to show messages to the user
+        function showMessage(message, isError = false) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden');
+            if (isError) {
+                messageBox.classList.remove('bg-green-100', 'text-green-800');
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            } else {
+                messageBox.classList.remove('bg-red-100', 'text-red-800');
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            }
+        }
+
+        // Handle form submission
+        submitBtn.addEventListener('click', async () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                showMessage('Please enter both email and password.', true);
+                return;
+            }
+
+            try {
+                if (isLogin) {
+                    // Sign In
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showMessage('Signed in successfully! Redirecting...');
+                    // onAuthStateChanged will handle the redirect
+                } else {
+                    // Sign Up
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    showMessage('Account created successfully! Redirecting...');
+                    // onAuthStateChanged will handle the redirect
+                }
+            } catch (error) {
+                showMessage(error.message, true);
+            }
+        });
+
+        // Toggle between Login and Sign Up forms
+        toggleFormLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+            if (isLogin) {
+                formTitle.textContent = 'Sign in to your account';
+                submitBtn.textContent = 'Sign in';
+                promptText.textContent = "Don't have an account?";
+                toggleFormLink.textContent = 'Sign up';
+            } else {
+                formTitle.textContent = 'Create a new account';
+                submitBtn.textContent = 'Sign up';
+                promptText.textContent = 'Already have an account?';
+                toggleFormLink.textContent = 'Sign in';
+            }
+            messageBox.classList.add('hidden');
+        });
+
+        // Initial sign-in attempt with provided token or anonymously
+        async function initialSignIn() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Initial sign-in failed:", error);
+            }
+        }
+
+        initialSignIn();
+
+    </script>
+
+</body>
+</html>
