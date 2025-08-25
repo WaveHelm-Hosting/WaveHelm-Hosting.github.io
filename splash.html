@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveHelm Group LLC.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wave-blue': '#0099ff',
+                        'wave-cyan': '#00eaff',
+                        'wave-dark': '#0a192f',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 15% 25%, rgba(0, 153, 255, 0.2), transparent 40%),
+                        radial-gradient(circle at 85% 75%, rgba(0, 234, 255, 0.2), transparent 40%);
+            animation: animate-gradient 20s ease-in-out infinite;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(0, 234, 255, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 234, 255, 0.7);
+            box-shadow: 0 20px 30px -10px rgba(0, 153, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .card .icon-glow {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover .icon-glow {
+             box-shadow: 0 0 20px 5px rgba(0, 234, 255, 0.3);
+        }
+
+        /* Entrance Animations */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        @keyframes animate-gradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+    
+    <div class="text-center max-w-4xl mx-auto z-10">
+        <img src="https://i.imgur.com/VYxsFe7.png" alt="WaveHelm Group LLC. Logo" class="h-24 mx-auto mb-4 fade-in-up" style="animation-delay: 0.2s;">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-white fade-in-up" style="animation-delay: 0.4s;">WaveHelm Group LLC.</h1>
+        <p class="mt-2 text-xl text-slate-300 fade-in-up" style="animation-delay: 0.6s;">Ride the Waves.</p>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- WaveHelm Hosting Card -->
+            <a href="index.html" class="card bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl fade-in-up" style="animation-delay: 0.8s;">
+                <div class="icon-glow flex items-center justify-center h-16 w-16 rounded-full bg-wave-blue text-white mx-auto mb-4">
+                    <i data-lucide="server" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold">WaveHelm Hosting</h2>
+                <p class="mt-2 text-slate-400">High-speed, reliable hosting solutions for websites, game servers, and dedicated applications.</p>
+            </a>
+
+            <!-- WaveHelm Prints Card -->
+            <a href="#" class="card bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl fade-in-up" style="animation-delay: 1s;">
+                <div class="icon-glow flex items-center justify-center h-16 w-16 rounded-full bg-wave-cyan text-wave-dark mx-auto mb-4">
+                    <i data-lucide="printer" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold">WaveHelm Prints</h2>
+                <p class="mt-2 text-slate-400">Creative printing services with a focus on quality, customization, and vibrant results.</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
